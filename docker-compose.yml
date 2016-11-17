@@ -1,0 +1,21 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+     - "8880:80"
+    volumes:
+     - ./source:/source
+     - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  php:
+    build: ./php    
+    volumes:
+     - ./source:/source
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: 'magento'
+      MYSQL_USER: 'magento'
+      MYSQL_PASSWORD: 'magento'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
